@@ -1,7 +1,6 @@
 plugins {
     id 'java'
     id 'org.jetbrains.kotlin.jvm' version '1.4.0'
-    id 'me.bristermitten.pdm' version '0.0.25'
 }
 
 group 'net.arsentic'
@@ -24,15 +23,11 @@ repositories {
 
 dependencies {
     // Overlord language
-    pdm "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    pdm "org.jetbrains.kotlin:kotlin-reflect:1.4.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.4.0"
 
     // Spigot Stuff
     compileOnly 'org.spigotmc:spigot:1.16.2'
-
-    // Dependencies
-    pdm 'dev.rosewood:guiframework:1.1.1'
-    pdm 'de.tr7zw:item-nbt-api:2.5.0'
 }
 
 compileKotlin {
@@ -40,5 +35,3 @@ compileKotlin {
         jvmTarget = "1.8"
     }
 }
-
-jar.dependsOn project.tasks.getByName('pdm')

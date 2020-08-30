@@ -1,6 +1,5 @@
 package net.arsentic.library
 
-import me.bristermitten.pdm.PDMBuilder
 import org.bukkit.Bukkit
 import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
@@ -9,10 +8,6 @@ import kotlin.reflect.KClass
 abstract class ArsenticLib : JavaPlugin() {
     private val kotlinManagers = mutableMapOf<KClass<out Manager>, Manager>()
     private val javaManagers = mutableMapOf<Class<out Manager>, Manager>()
-
-    override fun onLoad() {
-        PDMBuilder(this).build().loadAllDependencies().join()
-    }
 
     open fun enablePlugin() {
         this.saveDefaultConfig()
