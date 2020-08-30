@@ -1,14 +1,18 @@
 package net.arsentic.library
 
+import me.bristermitten.pdm.PDMBuilder
 import org.bukkit.Bukkit
 import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
 import kotlin.reflect.KClass
 
-open class ArsenticLib : JavaPlugin() {
+abstract class ArsenticLib : JavaPlugin() {
     private val kotlinManagers = mutableMapOf<KClass<out Manager>, Manager>()
     private val javaManagers = mutableMapOf<Class<out Manager>, Manager>()
 
+    override fun onLoad() {
+        PDMBuilder(this).build().loadAllDependencies().join()
+    }
 
     open fun enablePlugin() {
         this.saveDefaultConfig()
@@ -21,20 +25,19 @@ open class ArsenticLib : JavaPlugin() {
         server.consoleSender.sendMessage(HexUtils.colorify("&8[&b&lArsentic&8] &7-> The arsentic plugin, ${description.name} has been &cdisabled &7successfully!"))
     }
 
-    fun registerListeners(vararg listeners: Listener) {
+    open fun registerListeners(vararg listeners: Listener) {
         for (listener in listeners) {
             Bukkit.getPluginManager().registerEvents(listener, this)
         }
     }
 
-    fun registerCommands(vararg commands: ArsenticCommand) {
+    open fun registerCommands(vararg commands: ArsenticCommand) {
         for (cmd in commands) {
             cmd.register()
         }
     }
 
-
-    private fun reload() {
+    fun reload() {
         this.disableManagers()
         this.server.scheduler.cancelTasks(this)
         this.kotlinManagers.values.forEach { manager -> manager.reload() }
@@ -42,7 +45,7 @@ open class ArsenticLib : JavaPlugin() {
 
     }
 
-    private fun disableManagers() {
+    fun disableManagers() {
         this.kotlinManagers.values.forEach { manager -> manager.reload() }
         this.javaManagers.values.forEach { manager -> manager.reload() }
     }
