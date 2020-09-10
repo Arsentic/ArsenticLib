@@ -4,17 +4,20 @@ import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 import org.bukkit.command.TabExecutor
+import org.bukkit.event.Listener
 
 /**
  * @author Oribuin
  */
-abstract class ArsenticCommand(open val plugin: ArsenticLib, private val name: String) : TabExecutor {
+abstract class ArsenticCommand(open val plugin: ArsenticLib, private val name: String) : TabExecutor, Listener {
     fun register() {
         val cmd = Bukkit.getPluginCommand(name)
         if (cmd != null) {
             cmd.setExecutor(this)
             cmd.tabCompleter = this
         }
+
+        Bukkit.getPluginManager().registerEvents(this, plugin)
     }
 
     /**
@@ -46,6 +49,9 @@ abstract class ArsenticCommand(open val plugin: ArsenticLib, private val name: S
     override fun onTabComplete(sender: CommandSender, command: Command, alias: String, args: Array<String>): List<String>? {
         return tabComplete(sender, args)
     }
+
+    // Define the prefix
+    val prefix = "&8[&b&lArsentic&8] &7➜"
 
     // Get the command via name
     val command: Command?

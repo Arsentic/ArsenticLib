@@ -1,5 +1,4 @@
 package net.arsentic.library
-
 import net.md_5.bungee.api.ChatColor
 import org.bukkit.Bukkit
 import java.awt.Color
@@ -12,7 +11,6 @@ import kotlin.math.roundToInt
 /**
  * @author Esophose
  */
-
 object HexUtils {
     private const val CHARS_UNTIL_LOOP = 30
     private val LOOP_VALUES = listOf("l", "L", "loop")
@@ -341,4 +339,5 @@ internal object NMSUtil {
             }
             return cachedVersionNumber
         }
+
 }
