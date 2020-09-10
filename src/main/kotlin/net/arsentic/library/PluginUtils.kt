@@ -15,4 +15,16 @@ object PluginUtils {
     fun transformName(itemStack: ItemStack): String {
         return itemStack.type.name.replace("_", " ").toLowerCase().capitalize()
     }
+
+
+    @JvmStatic
+    fun isNumber(string: String): Boolean {
+        try {
+            Integer.parseInt(string)
+        } catch (ex: NumberFormatException) {
+            return false
+        }
+
+        return true
+    }
 }
