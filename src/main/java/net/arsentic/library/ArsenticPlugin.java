@@ -91,8 +91,8 @@ public abstract class ArsenticPlugin extends JavaPlugin {
             this.managers.put(managerClass, manager);
             manager.reload();
             return manager;
-        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException ex) {
-            ex.printStackTrace();
+        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException ignored) {
+            // Ignore it, Sorry :(
         }
 
         return (T) this.managers.get(managerClass);
