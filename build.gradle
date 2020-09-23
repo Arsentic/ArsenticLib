@@ -21,3 +21,4 @@ repositories {
 dependencies {
     compileOnly 'org.spigotmc:spigot:1.16.3'
 }
+
